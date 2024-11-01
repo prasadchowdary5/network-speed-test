@@ -2,26 +2,21 @@ import streamlit as st
 import speedtest
 
 def main():
-    st.title("Network Speed Test")
-    st.write("Click the button below to test your internet speed.")
+    st.title("Download Speed Test")
+    st.write("Click the button below to test your internet download speed, similar to fast.com.")
 
-    if st.button("Run Speed Test"):
+    if st.button("Run Download Speed Test"):
         # Initialize speedtest
-        st.write("Testing, please wait...")
-        st.spinner("Running speed test...")
+        st.write("Testing download speed, please wait...")
         speed_test = speedtest.Speedtest()
         speed_test.get_best_server()
-
-        # Measure download and upload speeds
+        
+        # Measure download speed only, similar to fast.com
         download_speed = speed_test.download() / 1_000_000  # Mbps
-        upload_speed = speed_test.upload() / 1_000_000      # Mbps
-        ping = speed_test.results.ping
-
-        # Display the results
-        st.success("Speed Test Results:")
+        
+        # Display the result
+        st.success("Download Speed Test Result:")
         st.metric("Download Speed", f"{download_speed:.2f} Mbps")
-        st.metric("Upload Speed", f"{upload_speed:.2f} Mbps")
-        st.metric("Ping", f"{ping:.0f} ms")
 
 if __name__ == "__main__":
     main()
